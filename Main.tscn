@@ -1,9 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvim0wxnurqry"]
+[gd_scene load_steps=3 format=3 uid="uid://cvim0wxnurqry"]
 
-[ext_resource type="Texture2D" uid="uid://6wba1imqpvdb" path="res://assets/pieces/xiangqi/shìh.png" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://i8k00ed3fp71" path="res://main.gd" id="1_uu6xs"]
+[ext_resource type="Texture2D" uid="uid://dsvf5tmrfxxx6" path="res://assets/boards/Main.webp" id="2_r0du0"]
 
-[node name="Shìh" type="Node2D"]
+[node name="Main" type="Node2D"]
+script = ExtResource("1_uu6xs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(32, 32)
-texture = ExtResource("1_glv2v")
+position = Vector2(568, 320)
+texture = ExtResource("2_r0du0")
+
+[node name="Play" type="Button" parent="."]
+offset_left = 510.0
+offset_top = 233.0
+offset_right = 651.0
+offset_bottom = 297.0
+flat = true
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 513.0
+offset_top = 361.0
+offset_right = 654.0
+offset_bottom = 425.0
+flat = true
