@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c43vwmpv1bxnk"
-path="res://.godot/imported/B_Knight.png-a8ff08a98d7509bf7dab07fa8e838052.ctex"
+uid="uid://dh3og4akxvny"
+path="res://.godot/imported/B_Rook.png-e16e936e6108e0f45ac6a0bf9a46c15e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pieces/chess/B_Knight.png"
-dest_files=["res://.godot/imported/B_Knight.png-a8ff08a98d7509bf7dab07fa8e838052.ctex"]
+source_file="res://assets/pieces/chess/B_Rook.png"
+dest_files=["res://.godot/imported/B_Rook.png-e16e936e6108e0f45ac6a0bf9a46c15e.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjm7rhxaodd6k"
-path="res://.godot/imported/W_Knight.png-40cd551bf1fb64a54824f804379d5a0d.ctex"
+uid="uid://cb4yxrakqmai0"
+path="res://.godot/imported/W_Bishop.png-b88a0877cd135d44230172585087c9b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pieces/chess/W_Knight.png"
-dest_files=["res://.godot/imported/W_Knight.png-40cd551bf1fb64a54824f804379d5a0d.ctex"]
+source_file="res://assets/pieces/chess/W_Bishop.png"
+dest_files=["res://.godot/imported/W_Bishop.png-b88a0877cd135d44230172585087c9b2.ctex"]
 
 [params]
 

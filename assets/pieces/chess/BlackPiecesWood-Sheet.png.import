@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db3o0s55j8hdy"
-path="res://.godot/imported/B_Pawn.png-6e6cae21c272925d58f81789a41ca4f3.ctex"
+uid="uid://dy0l2w3fbhmr3"
+path="res://.godot/imported/BlackPiecesWood-Sheet.png-1872de8f64f112133a43c3217fa6b5eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pieces/chess/B_Pawn.png"
-dest_files=["res://.godot/imported/B_Pawn.png-6e6cae21c272925d58f81789a41ca4f3.ctex"]
+source_file="res://assets/pieces/chess/BlackPiecesWood-Sheet.png"
+dest_files=["res://.godot/imported/BlackPiecesWood-Sheet.png-1872de8f64f112133a43c3217fa6b5eb.ctex"]
 
 [params]
 
