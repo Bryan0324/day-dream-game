@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdu4q4nlka7xu"]
+
+[ext_resource type="Script" uid="uid://d3y7ovcgp8l8i" path="res://start_menu/streat_manu.gd" id="1_qdmhb"]
+
+[node name="StartMenu" type="Node2D"]
+script = ExtResource("1_qdmhb")
+
+[node name="title" type="Label" parent="."]
+offset_left = 443.0
+offset_top = 257.0
+offset_right = 628.0
+offset_bottom = 280.0
+text = "game"
+horizontal_alignment = 1
+
+[node name="start" type="Button" parent="."]
+offset_left = 446.0
+offset_top = 299.0
+offset_right = 625.0
+offset_bottom = 330.0
+text = "開始遊戲"
+
+[node name="quit" type="Button" parent="."]
+offset_left = 446.0
+offset_top = 338.0
+offset_right = 625.0
+offset_bottom = 369.0
+text = "退出
+"
+
+[node name="settings" type="Button" parent="."]
+offset_left = 446.0
+offset_top = 379.0
+offset_right = 625.0
+offset_bottom = 410.0
+text = "設置"
+
+[node name="SettingMenu" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="SettingMenu"]
+offset_left = 435.0
+offset_top = 66.0
+offset_right = 741.0
+offset_bottom = 589.0
+
+[node name="back" type="Button" parent="SettingMenu"]
+offset_left = 697.0
+offset_top = 72.0
+offset_right = 737.0
+offset_bottom = 103.0
+text = "返回"

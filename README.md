@@ -1,2 +1,2 @@
-# day-dream-game
-day-dream-game
+# daydrem-game
+daydrem 
