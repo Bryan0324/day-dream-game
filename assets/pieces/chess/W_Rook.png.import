@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy0l2w3fbhmr3"
-path="res://.godot/imported/BlackPiecesWood-Sheet.png-c7fc91bc1b674c8932ca1cbadeeed7e9.ctex"
+uid="uid://dm8vh3rbbx15m"
+path="res://.godot/imported/W_Rook.png-4a5532257bee6cbdb5192350017b806d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pieces/chess/BlackPiecesWood-Sheet.png"
-dest_files=["res://.godot/imported/BlackPiecesWood-Sheet.png-c7fc91bc1b674c8932ca1cbadeeed7e9.ctex"]
+source_file="res://assets/pieces/chess/W_Rook.png"
+dest_files=["res://.godot/imported/W_Rook.png-4a5532257bee6cbdb5192350017b806d.ctex"]
 
 [params]
 
