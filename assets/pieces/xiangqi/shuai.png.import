@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsggef7rs2u66"
-path="res://.godot/imported/board.png-ff88c68a44fdec7006dce9f2534c3f25.ctex"
+uid="uid://crvgw1gi1gj2b"
+path="res://.godot/imported/shuai.png-0cf609ed651c0507414569cf54bd7639.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/boards/board.png"
-dest_files=["res://.godot/imported/board.png-ff88c68a44fdec7006dce9f2534c3f25.ctex"]
+source_file="res://assets/pieces/xiangqi/shuai.png"
+dest_files=["res://.godot/imported/shuai.png-0cf609ed651c0507414569cf54bd7639.ctex"]
 
 [params]
 

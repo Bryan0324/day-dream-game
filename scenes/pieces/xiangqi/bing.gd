@@ -3,9 +3,9 @@ extends Node2D
 @export var start_grid: Vector2i = Vector2i(0,0)
 var piece_owner = "xiangqi"
 var position_grid: Vector2i
-
-# 是否已過河
 var crossed_river = false
+
+@onready var sprite = $Sprite2D  # Bing.tscn 裡的 Sprite2D
 
 func _ready():
 	position_grid = start_grid
@@ -16,7 +16,6 @@ func check_cross_river():
 	if position_grid.y >= 5:
 		crossed_river = true
 
-# 過河前只能直走，過河後可左右走
 func get_moves() -> Array[Vector2i]:
 	var moves = []
 	if not crossed_river:

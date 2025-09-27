@@ -1,78 +1,132 @@
 extends Node2D
 
-# 將棋子統一放到 PiecesContainer
-@onready var pieces_container = $PiecesContainer
-# 顯示可走格或可吃格的高亮圖層
-@onready var highlight_layer = $HighlightLayer
+@onready var board_sprite: Sprite2D = $BoardSprite
+@onready var pieces_container: Node2D = $PiecesContainer
+@onready var highlight_layer: Node2D = $HighlightLayer
 
-const TILE_SIZE = 64
+const GRID_COLS := 16
+const GRID_ROWS := 16
 
-# 預載棋子 Scene
-const PAWN_SCENE = preload("res://scenes/pieces/chess/Pawn.tscn")
-const BING_SCENE = preload("res://scenes/pieces/xiangqi/Bing.tscn")
-
-var selected_piece = null
+var tile_size: Vector2 = Vector2.ZERO
+var board_state: Array = []   # 2D 陣列，用來儲存棋子
 
 func _ready():
-	# 自動生成棋子
-	spawn_pieces()
+	_resize_board()
+	_calc_tile_size()
+	_init_board_state()
+	_spawn_all_pieces()
 
-# 將格子座標 Vector2i 轉世界座標 Vector2
-func grid_to_world(pos: Vector2i) -> Vector2:
-	return Vector2(pos) * TILE_SIZE + Vector2(TILE_SIZE/2, TILE_SIZE/2)
+# ---------- 棋盤大小與格子 ----------
+func _resize_board():
+	var margin = 30  # 留 30px 邊界
+	var viewport_size = get_viewport_rect().size
+	var tex_size = board_sprite.texture.get_size()
+	var scale_factor = min(viewport_size.x / (tex_size.x+margin), viewport_size.y / (tex_size.y+margin*6))
+	board_sprite.scale = Vector2.ONE * scale_factor
 
-# 將世界座標轉格子座標
+	var board_size = tex_size * scale_factor
+	board_sprite.position = (viewport_size - board_size) * 0.5 + Vector2(margin, margin)
+
+func _calc_tile_size():
+	var board_size = board_sprite.texture.get_size() * board_sprite.scale
+	tile_size = board_size / Vector2(GRID_COLS, GRID_ROWS)
+	print("tile_size = ", tile_size)
+# ---------- 棋盤狀態 ----------
+func _init_board_state():
+	board_state.clear()
+	for r in range(GRID_ROWS+1):
+		var row = []
+		for c in range(GRID_COLS+1):
+			row.append(null)   # 初始沒棋子
+		board_state.append(row)
+
+# ---------- 棋子生成 ----------
+func _spawn_all_pieces():
+	#------ 中國象棋 -----------------
+	# 車
+	for i in range(0, 20, 16):
+		_spawn_piece("res://scenes/pieces/xiangqi/Bing.tscn", Vector2i(i, 0))
+		
+	# 馬
+	for i in range(2, 20, 12):
+		_spawn_piece("res://scenes/pieces/xiangqi/Bing.tscn", Vector2i(i, 0))
+		
+	# 象
+	for i in range(4, 20, 8):
+		_spawn_piece("res://scenes/pieces/xiangqi/Bing.tscn", Vector2i(i, 0))
+		
+	# 仕
+	for i in range(6, 14, 4):
+		_spawn_piece("res://scenes/pieces/xiangqi/Bing.tscn", Vector2i(i, 0))
+		
+	# 帥
+	_spawn_piece("res://scenes/pieces/xiangqi/Bing.tscn", Vector2i(8, 0))
+	
+	# 炮
+	for i in range(2, 20, 12):
+		_spawn_piece("res://scenes/pieces/xiangqi/Bing.tscn", Vector2i(i, 4))
+	
+	# 兵
+	for i in range(0, 20, 4):
+		_spawn_piece("res://scenes/pieces/xiangqi/Bing.tscn", Vector2i(i, 6))
+	
+	# ------------------------------------
+	
+	# ------ 西洋棋 -----------------------
+	# 兵
+	for i in range(1, 17, 2):
+		_spawn_piece("res://scenes/pieces/chess/Pawn.tscn", Vector2i(i, 13))
+		
+	# 
+	for i in range(1, 17, 14):
+		_spawn_piece("res://scenes/pieces/chess/Pawn.tscn", Vector2i(i, 15))
+		
+	# 
+	for i in range(3, 17, 10):
+		_spawn_piece("res://scenes/pieces/chess/Pawn.tscn", Vector2i(i, 15))
+		
+	# 
+	for i in range(5, 17, 6):
+		_spawn_piece("res://scenes/pieces/chess/Pawn.tscn", Vector2i(i, 15))
+		
+	# 
+	_spawn_piece("res://scenes/pieces/chess/Pawn.tscn", Vector2i(7, 15))
+	
+	# 
+	_spawn_piece("res://scenes/pieces/chess/Pawn.tscn", Vector2i(9, 15))
+
+func _spawn_piece(scene_path: String, grid: Vector2i):
+	var piece_scene = load(scene_path)
+	var piece : Node2D = piece_scene.instantiate()
+	pieces_container.add_child(piece)
+	
+	# 棋子座標與狀態同步
+	piece.position_grid = grid
+	piece.global_position = grid_to_world(grid)
+	board_state[grid.y][grid.x] = piece
+
+	# 自動縮放棋子 sprite
+	if piece.has_node("Sprite2D"):
+		var spr: Sprite2D = piece.get_node("Sprite2D")
+		var tex_size = spr.texture.get_size()
+		var scale_factor = min(tile_size.x / tex_size.x, tile_size.y / tex_size.y) * 1.5
+		spr.scale = Vector2.ONE * scale_factor
+		spr.z_index = 2
+
+	print(piece.name, " placed at ", grid)
+
+
+
+
+
+
+# ---------- 座標轉換 ----------
+func grid_to_world(grid: Vector2i) -> Vector2:
+	# 左上角為棋盤原點
+	var local_pos = Vector2(grid) * tile_size
+	# 棋子底部中心位置要加 tile_size.y
+	return board_sprite.position + local_pos - Vector2(tile_size.x/2, tile_size.y)
+
 func world_to_grid(world_pos: Vector2) -> Vector2i:
-	return (world_pos / TILE_SIZE).floor()
-
-# 自動生成棋子，並設定起始格子與所屬方
-func spawn_pieces():
-	var pawn = PAWN_SCENE.instantiate()
-	pawn.piece_owner = "chess"
-	pawn.start_grid = Vector2i(0,0)  # 最左下角
-	pieces_container.add_child(pawn)
-	print("Pawn added at ", pawn.start_grid)
-
-	var bing = BING_SCENE.instantiate()
-	bing.piece_owner = "xiangqi"
-	bing.start_grid = Vector2i(1,0)
-	pieces_container.add_child(bing)
-	print("Bing added at ", bing.start_grid)
-
-
-# 處理滑鼠點擊選棋子與移動
-func _input(event):
-	if event is InputEventMouseButton and event.pressed:
-		var mouse_pos = event.position
-		var clicked_piece = get_piece_at(mouse_pos)
-
-		if clicked_piece:
-			# 選中棋子
-			selected_piece = clicked_piece
-			highlight_moves(selected_piece)
-		elif selected_piece:
-			# 嘗試移動棋子
-			var target_grid = world_to_grid(mouse_pos)
-			if target_grid in selected_piece.get_moves():
-				selected_piece.position_grid = target_grid
-				selected_piece.global_position = grid_to_world(target_grid)
-			highlight_layer.clear()
-			selected_piece = null
-
-# 回傳滑鼠點擊位置的棋子
-func get_piece_at(world_pos: Vector2):
-	for piece in pieces_container.get_children():
-		if piece.global_position.distance_to(world_pos) < TILE_SIZE/2:
-			return piece
-	return null
-
-# 高亮可走格
-func highlight_moves(piece):
-	highlight_layer.clear()
-	var moves = piece.get_moves()
-	for pos in moves:
-		var highlight = ColorRect.new()
-		highlight.color = Color(0,1,0,0.5)  # 綠色高亮
-		highlight.rect_size = Vector2(TILE_SIZE, TILE_SIZE)
-		highlight.position = grid_to_world(pos) - highlight.rect_size/2
-		highlight_layer.add_child(highlight)
+	var local = world_pos - board_sprite.position
+	return Vector2i((local / tile_size).floor())

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DayDream_game"
-run/main_scene="uid://cdu4q4nlka7xu"
+run/main_scene="uid://cqjnvig2mleqo"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 <<<<<<<Updatedupstreamconfig/name="daydrem_game"
