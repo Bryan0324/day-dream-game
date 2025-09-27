@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dru7u0x1qvs0c"]
+
+[sub_resource type="GDScript" id="GDScript_3dqq8"]
+script/source = "extends Node2D
+
+var position_grid: Vector2i
+var killing = true
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dqq8"]
+size = Vector2(40, 40)
+
+[node name="Light" type="Node2D"]
+script = SubResource("GDScript_3dqq8")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.8509804, 0.7529412, 0.81960785, 1)
+polygon = PackedVector2Array(0, -20, -20, 0, 0, 20, 20, 0)
+
+[node name="Area2D" type="Area2D" parent="Polygon2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Polygon2D/Area2D"]
+shape = SubResource("RectangleShape2D_3dqq8")

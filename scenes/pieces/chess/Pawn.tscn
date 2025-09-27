@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cas5optajjfbc"]
+[gd_scene load_steps=4 format=3 uid="uid://cas5optajjfbc"]
 
 [ext_resource type="Script" uid="uid://7qd1in3tv02r" path="res://scenes/pieces/chess/pawn.gd" id="1_j1nse"]
 [ext_resource type="Texture2D" uid="uid://db3o0s55j8hdy" path="res://assets/pieces/chess/B_Pawn.png" id="2_7wukh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7wukh"]
+size = Vector2(50, 50)
 
 [node name="Pawn" type="Node2D"]
 script = ExtResource("1_j1nse")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_7wukh")
-centered = false
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_7wukh")

@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://des0idle8gb0i"]
+[gd_scene load_steps=4 format=3 uid="uid://des0idle8gb0i"]
 
 [ext_resource type="Script" uid="uid://vptpwhj7jhbu" path="res://scenes/pieces/xiangqi/bing.gd" id="1_f6ttx"]
 [ext_resource type="Texture2D" uid="uid://crvgw1gi1gj2b" path="res://assets/pieces/xiangqi/shuai.png" id="2_8538g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8538g"]
+size = Vector2(50, 50)
 
 [node name="Bing" type="Node2D"]
 script = ExtResource("1_f6ttx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_8538g")
-centered = false
-offset = Vector2(-6, -2)
+offset = Vector2(0, -3)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8538g")

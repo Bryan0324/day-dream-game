@@ -2,11 +2,11 @@ extends Node2D
 
 @onready var board_sprite: Sprite2D = $BoardSprite
 @onready var pieces_container: Node2D = $PiecesContainer
-@onready var highlight_layer: Node2D = $HighlightLayer
+@onready var HighlightLayer: Node2D = $HighlightLayer
 
 const GRID_COLS := 16
 const GRID_ROWS := 16
-
+var selected_piece: Node2D
 var tile_size: Vector2 = Vector2.ZERO
 var board_state: Array = []   # 2D 陣列，用來儲存棋子
 
@@ -99,11 +99,10 @@ func _spawn_piece(scene_path: String, grid: Vector2i):
 	var piece_scene = load(scene_path)
 	var piece : Node2D = piece_scene.instantiate()
 	pieces_container.add_child(piece)
-	
 	# 棋子座標與狀態同步
 	piece.position_grid = grid
 	piece.global_position = grid_to_world(grid)
-	board_state[grid.y][grid.x] = piece
+	board_state[grid.x][grid.y] = piece
 
 	# 自動縮放棋子 sprite
 	if piece.has_node("Sprite2D"):
@@ -112,9 +111,47 @@ func _spawn_piece(scene_path: String, grid: Vector2i):
 		var scale_factor = min(tile_size.x / tex_size.x, tile_size.y / tex_size.y) * 1.5
 		spr.scale = Vector2.ONE * scale_factor
 		spr.z_index = 2
-
+		if piece.piece_owner == "chess":
+			spr.offset = Vector2(0, -tile_size.y*0.1)
 	print(piece.name, " placed at ", grid)
+	var area: Area2D = piece.get_node("Area2D")
+	area.connect("input_event", Callable(self, "_on_piece_clicked").bind(piece))
+	
+func _on_piece_clicked(viewport, event, shape_idx, piece):
+	if event is InputEventMouseButton and event.pressed:
+		print("Clicked piece: ", piece.name, " at grid ", piece.position_grid)
+		if selected_piece == null:
+			selected_piece = piece
+			HighlightLayer._show_highlight(piece._get_valid_moves())
+		else:
+			selected_piece = null
+			HighlightLayer._clear_highlight()
 
+func _move_piece(light_grid : Node2D):
+	var pos = selected_piece.position_grid
+	var grid = light_grid.position_grid
+	print("form", pos, " moving to ", grid)
+	if(light_grid.killing):
+		var x_over = grid.x+1 == board_state.size()
+		var y_over = grid.y+1 == board_state[0].size()
+		var x_neg = grid.x == 0
+		var y_neg = grid.y == 0
+		var dx = []
+		var dy = []
+		if(!x_over): dx.append(grid.x+1)
+		if(!y_over): dy.append(grid.y+1)
+		if(!x_neg): dx.append(grid.x-1)
+		if(!y_neg): dy.append(grid.y-1)
+		for x in dx:
+			for y in dy:
+				if(board_state[x][y] != null):
+					board_state[x][y].queue_free()
+					board_state[x][y] = null
+	board_state[pos.x][pos.y].queue_free()
+	_spawn_piece(selected_piece.origin, grid)
+	board_state[pos.x][pos.y] = null
+	selected_piece = null
+	
 
 
 
@@ -123,9 +160,9 @@ func _spawn_piece(scene_path: String, grid: Vector2i):
 # ---------- 座標轉換 ----------
 func grid_to_world(grid: Vector2i) -> Vector2:
 	# 左上角為棋盤原點
-	var local_pos = Vector2(grid) * tile_size
+	var local_pos = Vector2(grid.x*tile_size.x, grid.y*tile_size.y)
 	# 棋子底部中心位置要加 tile_size.y
-	return board_sprite.position + local_pos - Vector2(tile_size.x/2, tile_size.y)
+	return board_sprite.position + local_pos
 
 func world_to_grid(world_pos: Vector2) -> Vector2i:
 	var local = world_pos - board_sprite.position
