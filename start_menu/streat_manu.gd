@@ -47,3 +47,4 @@ func hide_setting_menu():
 func _on_back_pressed():
 	print("返回主選單")
 	hide_setting_menu()
+	

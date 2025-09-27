@@ -4,6 +4,11 @@ extends Node2D
 @onready var pieces_container: Node2D = $PiecesContainer
 @onready var HighlightLayer: Node2D = $HighlightLayer
 @onready var turn_label: Label = $TurnLabel
+@onready var win_menu: CanvasLayer = $WinMenu
+@onready var win_color_rect: ColorRect = $WinMenu/ColorRect
+@onready var winner_label: Label = $WinMenu/ColorRect/Winner
+@onready var again_button: Button = $WinMenu/ColorRect/Again
+@onready var leave_button: Button = $WinMenu/ColorRect/Leve
 const GRID_COLS := 16
 const GRID_ROWS := 16
 var selected_piece: Node2D
@@ -15,6 +20,7 @@ func _ready():
 	_calc_tile_size()
 	_init_board_state()
 	_spawn_all_pieces()
+	_setup_win_menu()
 
 # ---------- 棋盤大小與格子 ----------
 func _resize_board():
@@ -134,11 +140,17 @@ func _update_turn_label():
 	else:
 		turn_label.text = "\"現在是中國象棋回合\""
 func _move_piece(light_grid : Node2D):
-	now_trun_chess = !now_trun_chess  # 換回合
-	_update_turn_label()              # 更新顯示
 	var pos = selected_piece.position_grid
 	var grid = light_grid.position_grid
 	print("form", pos, " moving to ", grid)
+
+	# 檢查目標位置是否有棋子需要被吃掉
+	if board_state[grid.x][grid.y] != null:
+		print("吃掉棋子: ", board_state[grid.x][grid.y].origin)
+		board_state[grid.x][grid.y].queue_free()
+		board_state[grid.x][grid.y] = null
+
+	# 處理特殊殺戮模式（周圍棋子）
 	if(light_grid.killing):
 		var x_over = grid.x+1 == board_state.size()
 		var y_over = grid.y+1 == board_state[0].size()
@@ -153,12 +165,24 @@ func _move_piece(light_grid : Node2D):
 		for x in dx:
 			for y in dy:
 				if(board_state[x][y] != null):
+					print("特殊殺戮吃掉: ", board_state[x][y].origin)
 					board_state[x][y].queue_free()
 					board_state[x][y] = null
+
+	# 移除原位置的棋子
 	board_state[pos.x][pos.y].queue_free()
-	_spawn_piece(selected_piece.origin, grid)
 	board_state[pos.x][pos.y] = null
+
+	# 在新位置生成棋子
+	_spawn_piece(selected_piece.origin, grid)
 	selected_piece = null
+
+	# 檢查勝利條件
+	_check_win_condition()
+
+	# 換回合
+	now_trun_chess = !now_trun_chess  # 換回合
+	_update_turn_label()              # 更新顯示
 	
 
 
@@ -181,3 +205,67 @@ func check_legal(pos : Vector2i):
 	
 func check_board(pos : Vector2i):
 	return  board_state[pos.x][pos.y] != null
+
+# ---------- 勝利選單功能 ----------
+func _setup_win_menu():
+	win_color_rect.hide()
+	again_button.text = "再來一局"
+	leave_button.text = "回到主選單"
+	again_button.pressed.connect(_on_again_pressed)
+	leave_button.pressed.connect(_on_leave_pressed)
+
+func _on_again_pressed():
+	_reset_board()
+
+func _on_leave_pressed():
+	get_tree().change_scene_to_file("res://Main.tscn")
+
+func _reset_board():
+	win_color_rect.hide()
+	selected_piece = null
+	now_trun_chess = true
+	HighlightLayer._clear_highlight()
+	_clear_all_pieces()
+	_init_board_state()
+	_spawn_all_pieces()
+	_update_turn_label()
+
+func _clear_all_pieces():
+	for child in pieces_container.get_children():
+		child.queue_free()
+
+func _check_win_condition():
+	var chess_king_alive = false
+	var xiangqi_shuai_alive = false
+
+	print("檢查勝利條件...")
+
+	for x in range(board_state.size()):
+		for y in range(board_state[0].size()):
+			var piece = board_state[x][y]
+			if piece != null:
+				print("發現棋子: ", piece.origin, " 擁有者: ", piece.piece_owner)
+				if piece.piece_owner == "chess" and ("King.tscn" in piece.origin):
+					chess_king_alive = true
+					print("西洋棋王還活著")
+				elif piece.piece_owner == "xiangqi" and ("Shuai.tscn" in piece.origin):
+					xiangqi_shuai_alive = true
+					print("中國象棋帥還活著")
+
+	print("西洋棋王: ", chess_king_alive, " 中國象棋帥: ", xiangqi_shuai_alive)
+
+	if not chess_king_alive:
+		print("西洋棋王被吃掉了!")
+		_show_winner("中國象棋獲勝!")
+		return true
+	elif not xiangqi_shuai_alive:
+		print("中國象棋帥被吃掉了!")
+		_show_winner("西洋棋獲勝!")
+		return true
+
+	return false
+
+func _show_winner(winner_text: String):
+	winner_label.text = winner_text
+	winner_label.add_theme_font_size_override("font_size", 48)
+	win_color_rect.show()
