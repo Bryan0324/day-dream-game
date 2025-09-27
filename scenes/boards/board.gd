@@ -45,26 +45,26 @@ func _spawn_all_pieces():
 	#------ 中國象棋 -----------------
 	# 車
 	for i in range(0, 20, 16):
-		_spawn_piece("res://scenes/pieces/xiangqi/Bing.tscn", Vector2i(i, 0))
+		_spawn_piece("res://scenes/pieces/xiangqi/Che.tscn", Vector2i(i, 0))
 		
 	# 馬
 	for i in range(2, 20, 12):
-		_spawn_piece("res://scenes/pieces/xiangqi/Bing.tscn", Vector2i(i, 0))
+		_spawn_piece("res://scenes/pieces/xiangqi/Ma.tscn", Vector2i(i, 0))
 		
 	# 象
 	for i in range(4, 20, 8):
-		_spawn_piece("res://scenes/pieces/xiangqi/Bing.tscn", Vector2i(i, 0))
+		_spawn_piece("res://scenes/pieces/xiangqi/Xiang.tscn", Vector2i(i, 0))
 		
 	# 仕
 	for i in range(6, 14, 4):
-		_spawn_piece("res://scenes/pieces/xiangqi/Bing.tscn", Vector2i(i, 0))
+		_spawn_piece("res://scenes/pieces/xiangqi/Shih.tscn", Vector2i(i, 0))
 		
 	# 帥
-	_spawn_piece("res://scenes/pieces/xiangqi/Bing.tscn", Vector2i(8, 0))
+	_spawn_piece("res://scenes/pieces/xiangqi/Shuai.tscn", Vector2i(8, 0))
 	
 	# 炮
 	for i in range(2, 20, 12):
-		_spawn_piece("res://scenes/pieces/xiangqi/Bing.tscn", Vector2i(i, 4))
+		_spawn_piece("res://scenes/pieces/xiangqi/Pao.tscn", Vector2i(i, 4))
 	
 	# 兵
 	for i in range(0, 20, 4):
@@ -79,21 +79,21 @@ func _spawn_all_pieces():
 		
 	# 
 	for i in range(1, 17, 14):
-		_spawn_piece("res://scenes/pieces/chess/Pawn.tscn", Vector2i(i, 15))
+		_spawn_piece("res://scenes/pieces/chess/Castle.tscn", Vector2i(i, 15))
 		
 	# 
 	for i in range(3, 17, 10):
-		_spawn_piece("res://scenes/pieces/chess/Pawn.tscn", Vector2i(i, 15))
+		_spawn_piece("res://scenes/pieces/chess/Knight.tscn", Vector2i(i, 15))
 		
 	# 
 	for i in range(5, 17, 6):
-		_spawn_piece("res://scenes/pieces/chess/Pawn.tscn", Vector2i(i, 15))
+		_spawn_piece("res://scenes/pieces/chess/Bishop.tscn", Vector2i(i, 15))
 		
 	# 
-	_spawn_piece("res://scenes/pieces/chess/Pawn.tscn", Vector2i(7, 15))
+	_spawn_piece("res://scenes/pieces/chess/Queen.tscn", Vector2i(7, 15))
 	
 	# 
-	_spawn_piece("res://scenes/pieces/chess/Pawn.tscn", Vector2i(9, 15))
+	_spawn_piece("res://scenes/pieces/chess/King.tscn", Vector2i(9, 15))
 
 func _spawn_piece(scene_path: String, grid: Vector2i):
 	var piece_scene = load(scene_path)
@@ -167,3 +167,9 @@ func grid_to_world(grid: Vector2i) -> Vector2:
 func world_to_grid(world_pos: Vector2) -> Vector2i:
 	var local = world_pos - board_sprite.position
 	return Vector2i((local / tile_size).floor())
+
+func check_legal(pos : Vector2i):
+	return  0 <= pos.x and pos.x < board_state.size() and 0 <= pos.y and pos.y < board_state[0].size()
+	
+func check_board(pos : Vector2i):
+	return  board_state[pos.x][pos.y] != null

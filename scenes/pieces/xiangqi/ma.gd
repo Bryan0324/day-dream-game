@@ -5,7 +5,7 @@ var piece_owner = "xiangqi"
 var position_grid: Vector2i
 var killing = false
 
-var origin = "res://scenes/pieces/xiangqi/Bing.tscn"
+var origin = "res://scenes/pieces/xiangqi/Ma.tscn"
 @onready var sprite = $Sprite2D  # Bing.tscn 裡的 Sprite2D
 
 @onready var board = get_node("../../")
@@ -19,10 +19,13 @@ func cross_river():
 		return true
 	return false
 func _get_valid_moves() -> Array:
-	var unlimited_moves = [position_grid + Vector2i(0, 2)]
-	if cross_river():
-		unlimited_moves.append(position_grid + Vector2i(2, 0))
-		unlimited_moves.append(position_grid + Vector2i(-2, 0))
+	var unlimited_moves = []
+	var s = [2, 4]
+	var sign = [-1, 1]
+	for s1 in sign:
+		for s2 in sign:
+			unlimited_moves.append(position_grid + Vector2i(s1*s[0], s2*s[1]))
+			unlimited_moves.append(position_grid + Vector2i(s1*s[1], s2*s[0]))
 		
 	var moves = []
 	for i in unlimited_moves:

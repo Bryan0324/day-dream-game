@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://db1shlf67joj"]
+
+[ext_resource type="Script" uid="uid://dyp0thd8iajsi" path="res://scenes/pieces/xiangqi/shuai.gd" id="1_a4v2p"]
+[ext_resource type="Texture2D" uid="uid://crvgw1gi1gj2b" path="res://assets/pieces/xiangqi/shuai.png" id="2_yedct"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8538g"]
+size = Vector2(50, 50)
+
+[node name="Shuai" type="Node2D"]
+script = ExtResource("1_a4v2p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_yedct")
+offset = Vector2(0, -3)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8538g")

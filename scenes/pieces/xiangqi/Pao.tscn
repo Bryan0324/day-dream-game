@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://1c86ng3us1rg"]
+
+[ext_resource type="Script" uid="uid://pw2voxe2c1vu" path="res://scenes/pieces/xiangqi/pao.gd" id="1_hdv30"]
+[ext_resource type="Texture2D" uid="uid://bua2mr3802m4u" path="res://assets/pieces/xiangqi/pao.png" id="2_hdv30"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8538g"]
+size = Vector2(50, 50)
+
+[node name="Pao" type="Node2D"]
+script = ExtResource("1_hdv30")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_hdv30")
+offset = Vector2(0, -3)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8538g")

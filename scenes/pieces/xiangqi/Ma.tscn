@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://n7kgygp6hqh6"]
+
+[ext_resource type="Script" uid="uid://cb058tq1lgi5o" path="res://scenes/pieces/xiangqi/ma.gd" id="1_twj1r"]
+[ext_resource type="Texture2D" uid="uid://i8dla0dbfahh" path="res://assets/pieces/xiangqi/ma.png" id="2_twj1r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8538g"]
+size = Vector2(50, 50)
+
+[node name="Ma" type="Node2D"]
+script = ExtResource("1_twj1r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_twj1r")
+offset = Vector2(0, -3)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8538g")

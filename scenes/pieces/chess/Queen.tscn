@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ooio7ifl77u6"]
+
+[ext_resource type="Script" uid="uid://dfkurdgmd2rxm" path="res://scenes/pieces/chess/queen.gd" id="1_51fhl"]
+[ext_resource type="Texture2D" uid="uid://bipkeq3yiyp8g" path="res://assets/pieces/chess/B_Queen.png" id="2_m0x36"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8538g"]
+size = Vector2(50, 50)
+
+[node name="Queen" type="Node2D"]
+script = ExtResource("1_51fhl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_m0x36")
+offset = Vector2(0, -3)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8538g")

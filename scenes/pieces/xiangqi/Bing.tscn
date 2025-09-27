@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://des0idle8gb0i"]
 
 [ext_resource type="Script" uid="uid://vptpwhj7jhbu" path="res://scenes/pieces/xiangqi/bing.gd" id="1_f6ttx"]
-[ext_resource type="Texture2D" uid="uid://crvgw1gi1gj2b" path="res://assets/pieces/xiangqi/shuai.png" id="2_8538g"]
+[ext_resource type="Texture2D" uid="uid://51ml6gr86acl" path="res://assets/pieces/xiangqi/bing.png" id="2_8538g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8538g"]
 size = Vector2(50, 50)

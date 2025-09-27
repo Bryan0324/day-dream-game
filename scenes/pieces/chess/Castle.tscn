@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cub5mueddpu87"]
+
+[ext_resource type="Script" uid="uid://dc584q0tddt8g" path="res://scenes/pieces/chess/castle.gd" id="1_0ujdj"]
+[ext_resource type="Texture2D" uid="uid://dh3og4akxvny" path="res://assets/pieces/chess/B_Rook.png" id="2_0ujdj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8538g"]
+size = Vector2(50, 50)
+
+[node name="Castle" type="Node2D"]
+script = ExtResource("1_0ujdj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0ujdj")
+offset = Vector2(0, -3)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8538g")

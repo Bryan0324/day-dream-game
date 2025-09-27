@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpwp4jhblvcnm"]
+
+[ext_resource type="Script" uid="uid://c1tgn104fqmu7" path="res://scenes/pieces/xiangqi/che.gd" id="1_8o1pf"]
+[ext_resource type="Texture2D" uid="uid://dtyues7f32kai" path="res://assets/pieces/xiangqi/che.png" id="2_nkubr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8538g"]
+size = Vector2(50, 50)
+
+[node name="Che" type="Node2D"]
+script = ExtResource("1_8o1pf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_nkubr")
+offset = Vector2(0, -3)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8538g")

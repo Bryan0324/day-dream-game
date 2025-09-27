@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://i48t6njsulyj"]
+
+[ext_resource type="Script" uid="uid://ddchophii2ohr" path="res://scenes/pieces/chess/king.gd" id="1_gvnwk"]
+[ext_resource type="Texture2D" uid="uid://bcj48vm0ibgm6" path="res://assets/pieces/chess/B_King.png" id="2_6big1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8538g"]
+size = Vector2(50, 50)
+
+[node name="King" type="Node2D"]
+script = ExtResource("1_gvnwk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6big1")
+offset = Vector2(0, -3)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8538g")
