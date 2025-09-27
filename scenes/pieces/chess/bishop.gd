@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var start_grid: Vector2i = Vector2i(0,0)
-var piece_owner = "xiangqi"
+var piece_owner = "chess"
 var position_grid: Vector2i
 var killing = false
 

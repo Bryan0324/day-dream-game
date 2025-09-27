@@ -16,8 +16,9 @@ func _ready():
 
 func _get_valid_moves() -> Array:
 	var peace = []
+	var fight = []
 	var tmp = position_grid + Vector2i(0, -2)
 	if(board.check_legal(tmp)):
 		if(board.board_state[tmp.x][tmp.y] == null):
 			peace.append(tmp)
-	return [[], peace]
+	return [fight, peace]

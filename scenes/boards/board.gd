@@ -3,13 +3,13 @@ extends Node2D
 @onready var board_sprite: Sprite2D = $BoardSprite
 @onready var pieces_container: Node2D = $PiecesContainer
 @onready var HighlightLayer: Node2D = $HighlightLayer
-
+@onready var turn_label: Label = $TurnLabel
 const GRID_COLS := 16
 const GRID_ROWS := 16
 var selected_piece: Node2D
 var tile_size: Vector2 = Vector2.ZERO
 var board_state: Array = []   # 2D 陣列，用來儲存棋子
-
+var now_trun_chess = true
 func _ready():
 	_resize_board()
 	_calc_tile_size()
@@ -119,6 +119,7 @@ func _spawn_piece(scene_path: String, grid: Vector2i):
 	
 func _on_piece_clicked(viewport, event, shape_idx, piece):
 	if event is InputEventMouseButton and event.pressed:
+		if((piece.piece_owner == "chess") != now_trun_chess): return
 		print("Clicked piece: ", piece.name, " at grid ", piece.position_grid)
 		if selected_piece == null:
 			selected_piece = piece
@@ -126,8 +127,15 @@ func _on_piece_clicked(viewport, event, shape_idx, piece):
 		else:
 			selected_piece = null
 			HighlightLayer._clear_highlight()
-
+# ---------- 更新顯示 ----------
+func _update_turn_label():
+	if now_trun_chess:
+		turn_label.text = "\"現在是西洋棋回合\""
+	else:
+		turn_label.text = "\"現在是中國象棋回合\""
 func _move_piece(light_grid : Node2D):
+	now_trun_chess = !now_trun_chess  # 換回合
+	_update_turn_label()              # 更新顯示
 	var pos = selected_piece.position_grid
 	var grid = light_grid.position_grid
 	print("form", pos, " moving to ", grid)
