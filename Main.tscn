@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://cx7jfkp1t6lac"]
+[gd_scene load_steps=2 format=3 uid="uid://cvim0wxnurqry"]
 
-[node name="Main" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://6wba1imqpvdb" path="res://assets/pieces/xiangqi/shìh.png" id="1_glv2v"]
+
+[node name="Shìh" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+texture = ExtResource("1_glv2v")
