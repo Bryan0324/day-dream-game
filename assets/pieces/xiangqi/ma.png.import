@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bua2mr3802m4u"
-path="res://.godot/imported/páo.png-c20bef3050ea52478d3ed7ae329b23b4.ctex"
+uid="uid://i8dla0dbfahh"
+path="res://.godot/imported/ma.png-5a7cb3077aacaa021bc0cca35fd0cd09.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pieces/xiangqi/páo.png"
-dest_files=["res://.godot/imported/páo.png-c20bef3050ea52478d3ed7ae329b23b4.ctex"]
+source_file="res://assets/pieces/xiangqi/ma.png"
+dest_files=["res://.godot/imported/ma.png-5a7cb3077aacaa021bc0cca35fd0cd09.ctex"]
 
 [params]
 

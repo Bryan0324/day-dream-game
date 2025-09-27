@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://i8dla0dbfahh"
-path="res://.godot/imported/mǎ.png-99a5c412ee33978c3119db12496a765e.ctex"
+uid="uid://c8jw8tumkofrh"
+path="res://.godot/imported/xiang.png-550f484ceb01768fad3c506a7c488bd5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pieces/xiangqi/mǎ.png"
-dest_files=["res://.godot/imported/mǎ.png-99a5c412ee33978c3119db12496a765e.ctex"]
+source_file="res://assets/pieces/xiangqi/xiang.png"
+dest_files=["res://.godot/imported/xiang.png-550f484ceb01768fad3c506a7c488bd5.ctex"]
 
 [params]
 
