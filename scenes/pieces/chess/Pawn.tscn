@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cas5optajjfbc"]
+
+[ext_resource type="Script" uid="uid://7qd1in3tv02r" path="res://scenes/pieces/chess/pawn.gd" id="1_j1nse"]
+
+[node name="Pawn" type="Node2D"]
+script = ExtResource("1_j1nse")

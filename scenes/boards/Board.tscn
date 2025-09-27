@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqjnvig2mleqo"]
+
+[ext_resource type="Script" uid="uid://m3addy55r8j4" path="res://scenes/boards/board.gd" id="1_hs2ul"]
+[ext_resource type="Script" uid="uid://dmjmxmdm47nsy" path="res://scenes/boards/pieces_container.gd" id="1_qails"]
+[ext_resource type="TileSet" uid="uid://h2tcr8pyiamu" path="res://scenes/boards/Board.tres" id="2_aelu2"]
+
+[node name="Board" type="Node2D"]
+script = ExtResource("1_hs2ul")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_aelu2")
+
+[node name="PiecesContainer" type="Node2D" parent="."]
+script = ExtResource("1_qails")
+
+[node name="HighlightLayer" type="Node2D" parent="."]
