@@ -271,11 +271,11 @@ func _check_win_condition():
 
 	if not chess_king_alive:
 		print("西洋棋王被吃掉了!")
-		_show_winner("中國象棋獲勝!")
+		_show_winner("Chinese chess wins!")
 		return true
 	elif not xiangqi_shuai_alive:
 		print("中國象棋帥被吃掉了!")
-		_show_winner("西洋棋獲勝!")
+		_show_winner("Chess wins!")
 		return true
 
 	return false
