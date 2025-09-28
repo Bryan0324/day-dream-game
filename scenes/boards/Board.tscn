@@ -24,7 +24,7 @@ offset_left = 600.0
 offset_right = 1044.0
 offset_bottom = 69.0
 theme_override_font_sizes/font_size = 50
-text = "\"現在是西洋棋回合\""
+text = "\"chess's turn\""
 
 [node name="WinMenu" type="CanvasLayer" parent="."]
 
