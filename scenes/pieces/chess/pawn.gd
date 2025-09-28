@@ -30,7 +30,7 @@ func _get_valid_moves() -> Array:
 	# ----- fight -----
 	var unchecked_fight = [position_grid + Vector2i(-2, -2), position_grid + Vector2i(2, -2)]
 	for grid in unchecked_fight:
-		if(board.check_legal(tmp)):
+		if(board.check_legal(grid)):
 			if board.__check_around(grid):
 				fight.append(grid)
 	return [fight, peace]

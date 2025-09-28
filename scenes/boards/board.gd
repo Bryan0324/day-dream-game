@@ -136,9 +136,9 @@ func _on_piece_clicked(viewport, event, shape_idx, piece):
 # ---------- 更新顯示 ----------
 func _update_turn_label():
 	if now_trun_chess:
-		turn_label.text = "\"現在是西洋棋回合\""
+		turn_label.text = "\"chess's turn\""
 	else:
-		turn_label.text = "\"現在是中國象棋回合\""
+		turn_label.text = "\"xiangqi's turn\""
 func _move_piece(light_grid : Node2D):
 	var pos = selected_piece.position_grid
 	var grid = light_grid.position_grid
@@ -224,8 +224,8 @@ func check_board(pos : Vector2i):
 # ---------- 勝利選單功能 ----------
 func _setup_win_menu():
 	win_color_rect.hide()
-	again_button.text = "再來一局"
-	leave_button.text = "回到主選單"
+	again_button.text = "Play Again!"
+	leave_button.text = "Back To Menu"
 	again_button.pressed.connect(_on_again_pressed)
 	leave_button.pressed.connect(_on_leave_pressed)
 
