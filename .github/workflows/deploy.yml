@@ -16,18 +16,11 @@ jobs:
       # 匯出 Godot HTML5
       - name: Build Godot HTML5
         id: build
-        uses: manleydev/build-godot-action@v1.5
+        uses: manleydev/build-godot-action@v1.4.1
         with:
           name: example
           preset: HTML5    # ⚠️ 改成你 Godot 預設裡的 HTML5 export preset 名稱
           debugMode: "false"
-
-      # 上傳 Artifact（可選，用於除錯下載）
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Godot-HTML5
-          path: ${{ steps.build.outputs.build }}
 
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
