@@ -16,7 +16,7 @@ jobs:
       # 匯出 Godot HTML5
       - name: Build Godot HTML5
         id: build
-        uses: manleydev/build-godot-action@v1.4.1
+        uses: manleydev/build-godot-action@v1.5
         with:
           name: example
           preset: HTML5    # ⚠️ 改成你 Godot 預設裡的 HTML5 export preset 名稱
