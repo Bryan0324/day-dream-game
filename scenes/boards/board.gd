@@ -186,7 +186,22 @@ func _move_piece(light_grid : Node2D):
 	
 
 
-
+func __check_around(grid : Vector2i):
+	var x_over = grid.x+1 == board_state.size()
+	var y_over = grid.y+1 == board_state[0].size()
+	var x_neg = grid.x == 0
+	var y_neg = grid.y == 0
+	var dx = []
+	var dy = []
+	if(!x_over): dx.append(grid.x+1)
+	if(!y_over): dy.append(grid.y+1)
+	if(!x_neg): dx.append(grid.x-1)
+	if(!y_neg): dy.append(grid.y-1)
+	for x in dx:
+		for y in dy:
+			if(board_state[x][y] != null):
+				return true
+	return false
 
 
 # ---------- 座標轉換 ----------
