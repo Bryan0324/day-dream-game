@@ -143,7 +143,7 @@ func _move_piece(light_grid : Node2D):
 	var pos = selected_piece.position_grid
 	var grid = light_grid.position_grid
 	print("form", pos, " moving to ", grid)
-	if pos.y == 9:
+	if pos.y == 9 && selected_piece.origin == "res://scenes/pieces/chess/Pawn.tscn":
 		selected_piece.origin = "res://scenes/pieces/chess/Queen.tscn"
 	# 檢查目標位置是否有棋子需要被吃掉
 	if board_state[grid.x][grid.y] != null:
